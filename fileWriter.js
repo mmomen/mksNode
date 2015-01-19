@@ -2,7 +2,10 @@ var fs = require('fs');
 
 module.exports = function() {
 
-  this.write = function(name, data) {
+  this.write = function(name, data, overwrite) {
+    if (!overwrite) {
+      name = this.uid() + name;
+    }
     return fs.writeFileSync(name, data);
   };
 
@@ -17,7 +20,7 @@ module.exports = function() {
     if (!name) {
       throw "No filename given.";
     }
-    data = '\n' + data
+    data = '\n' + data;
     return fs.appendFileSync(name, data);
   };
 
@@ -28,6 +31,12 @@ module.exports = function() {
       }
       console.log(data.toString());
     });
+  };
+
+  this.uid = function() {
+    var m = new Date();
+    var dateString = m.getUTCFullYear() + '' + (m.getUTCMonth()+1) + '' + m.getUTCDate() + '' + m.getUTCHours() + '' + m.getUTCMinutes() + '' + m.getUTCSeconds();
+    return dateString;
   };
 
 };
