@@ -1,4 +1,4 @@
-var cryptoAPI = require('./crypto2');
+var cryptoAPI = require('./crypto');
 var crypto = new cryptoAPI();
 
 var secret_key = "pipe";

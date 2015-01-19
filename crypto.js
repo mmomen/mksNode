@@ -15,6 +15,6 @@ module.exports = function() {
     var dec = decipher.update(cipher, 'hex', 'utf8');
     dec += decipher.final('utf8');
     return dec;
-  }
+  };
 
 };
