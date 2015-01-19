@@ -21,4 +21,13 @@ module.exports = function() {
     return fs.appendFileSync(name, data);
   };
 
+  this.read = function(name) {
+    return fs.readFile(name, function(err, data) {
+      if (err) {
+        throw err;
+      }
+      console.log(data.toString());
+    });
+  };
+
 };
