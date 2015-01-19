@@ -18,6 +18,9 @@ switch (command) {
   case "read":
     myFs.append(file);
     break;
+  case "move":
+    myFs.move(process.argv[3], process.argv[4]);
+    break;
   default:
     throw "wtf dude where ur command at?";
 }

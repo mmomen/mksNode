@@ -51,4 +51,12 @@ module.exports = function() {
     return dateString;
   };
 
+  this.move = function(oldPath, newPath) {
+    return fs.rename(oldPath, newPath, function(err) {
+      if (err) {
+        throw err;
+      }
+    });
+  };
+
 };
