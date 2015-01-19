@@ -6,14 +6,22 @@ module.exports = function() {
     if (!overwrite) {
       name = this.uid() + name;
     }
-    return fs.writeFileSync(name, data);
+    return fs.writeFile(name, data, function(err, data) {
+      if (err) {
+        throw err;
+      }
+    });
   };
 
   this.create = function(name) {
     if (name === undefined) {
       name = 'nullFile';
     }
-    return fs.writeFileSync(name, '');
+    return fs.writeFile(name, '', function(err) {
+      if (err) {
+        throw err;
+      }
+    });
   };
 
   this.append = function(name, data) {
@@ -21,7 +29,11 @@ module.exports = function() {
       throw "No filename given.";
     }
     data = '\n' + data;
-    return fs.appendFileSync(name, data);
+    return fs.appendFile(name, data, function(err) {
+      if (err) {
+        throw err;
+      }
+    });
   };
 
   this.read = function(name) {

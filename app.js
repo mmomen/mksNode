@@ -6,4 +6,4 @@ var str = process.argv[3];
 // myFs.create(file);
 // myFs.append(file, str);
 // myFs.read(file);
-myFs.write(file, str, false);
+// myFs.write(file, str, false);
