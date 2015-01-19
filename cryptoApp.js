@@ -1,5 +1,7 @@
-var cryptoAPI = require('./crypto');
+var cryptoAPI = require('./crypto2');
 var crypto = new cryptoAPI();
 
 var secret_key = "pipe";
-console.log(crypto.encrypt("data", secret_key));
+var encrypted_data = crypto.encrypt("data", secret_key);
+
+console.log(crypto.decrypt(encrypted_data, secret_key));
