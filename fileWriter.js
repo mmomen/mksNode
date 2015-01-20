@@ -1,4 +1,5 @@
-var fs = require('fs');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = function() {
 
@@ -78,6 +79,20 @@ module.exports = function() {
     var orig = this.read(origPath);
     // console.log(orig);
     return this.write(newPath, orig, true);
+  };
+
+  this.search = function(searchPath, filter) {
+    return fs.readdir(searchPath, function(err, list) {
+      if (err) {
+        throw err;
+      }
+      list.forEach(function(e) {
+        var ext = path.extname(e);
+        if (ext === filter) {
+          console.log(e);
+        }
+      });
+    });
   };
 
 };

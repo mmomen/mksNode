@@ -22,6 +22,9 @@ switch (command) {
   case "copy":
     myFs.copy(process.argv[3], process.argv[4]);
     break;
+  case "search":
+    myFs.search(process.argv[3], process.argv[4]);
+    break;
   default:
     throw "wtf dude where ur command at?";
 }
