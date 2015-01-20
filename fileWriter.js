@@ -3,14 +3,27 @@ var fs = require('fs');
 module.exports = function() {
 
   this.write = function(name, data, overwrite) {
-    if (!overwrite) {
-      name = this.uid() + name;
+    var exist = fs.existsSync(name);
+    if (overwrite === 'true') {
+      overwrite = true;
+    } else {
+      overwrite = false;
     }
-    return fs.writeFile(name, data, function(err, data) {
-      if (err) {
-        throw err;
-      }
-    });
+    if (!overwrite && exist) { //do not overwrite and file exists, write file to new name
+      name = this.uid() + name;
+      return fs.writeFile(name, data, function(err, data) {
+        if (err) {
+          throw err;
+        }
+      });
+    } else { //overwrite file and the file may exists, just write
+      return fs.writeFile(name, data, function(err, data) {
+        if (err) {
+          throw err;
+        }
+      });
+    }
+
   };
 
   this.create = function(name) {
@@ -42,6 +55,7 @@ module.exports = function() {
         throw err;
       }
       console.log(data.toString());
+      return data.toString();
     });
   };
 
@@ -57,6 +71,13 @@ module.exports = function() {
         throw err;
       }
     });
+  };
+
+  this.copy = function(origPath, newPath) {
+    // return fs.createReadStream(origPath).pipe(fs.createWriteStream(newPath))
+    var orig = this.read(origPath);
+    // console.log(orig);
+    return this.write(newPath, orig, true);
   };
 
 };
