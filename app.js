@@ -1,25 +1,26 @@
 var FileApi = require('./fileWriter');
 var myFs = new FileApi();
 var command = process.argv[2].toLowerCase();
-var file = process.argv[3];
-var str = process.argv[4] || '';
-var overwrite = process.argv[5] || false;
 
 switch (command) {
   case "write":
-    myFs.write(file, str, overwrite);
+    console.log(process.argv[5]);
+    myFs.write(process.argv[3], process.argv[4] || '', process.argv[5]);
     break;
   case "create":
-    myFs.create(file);
+    myFs.create(process.argv[3]);
     break;
   case "append":
-    myFs.append(file, str);
+    myFs.append(process.argv[3], process.argv[4] || '');
     break;
   case "read":
-    myFs.append(file);
+    myFs.read(process.argv[3]);
     break;
   case "move":
     myFs.move(process.argv[3], process.argv[4]);
+    break;
+  case "copy":
+    myFs.copy(process.argv[3], process.argv[4]);
     break;
   default:
     throw "wtf dude where ur command at?";
